@@ -95,21 +95,15 @@ namespace LemonSqueezy.Client.Internal.HttpClients
 
         public async Task<Customer> CreateCustomerAsync(string storeId, string name, string email, CancellationToken cancellationToken = default)
         {
-            var data = new
-            {
-                data = new
-                {
-                    type = "customers",
-                    attributes = new
-                    {
-                        store_id = storeId,
-                        name,
-                        email
-                    }
-                }
-            };
+            var attributes = new CreateCustomerAttributes(storeId, name, email);
+            return await CreateCustomerAsync(attributes, cancellationToken);
+        }
 
-            var response = await _httpClient.PostAsJsonAsync("customers", data, _jsonOptions, cancellationToken);
+        public async Task<Customer> CreateCustomerAsync(CreateCustomerAttributes attributes, CancellationToken cancellationToken = default)
+        {
+            var request = new CreateCustomerRequest(attributes);
+
+            var response = await _httpClient.PostAsJsonAsync("customers", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -131,21 +125,15 @@ namespace LemonSqueezy.Client.Internal.HttpClients
 
         public async Task<Customer> UpdateCustomerAsync(string customerId, string name, string email, CancellationToken cancellationToken = default)
         {
-            var data = new
-            {
-                data = new
-                {
-                    type = "customers",
-                    id = customerId,
-                    attributes = new
-                    {
-                        name,
-                        email
-                    }
-                }
-            };
+            var attributes = new UpdateCustomerAttributes(name, email);
+            return await UpdateCustomerAsync(customerId, attributes, cancellationToken);
+        }
 
-            var response = await _httpClient.PatchAsJsonAsync($"customers/{customerId}", data, _jsonOptions, cancellationToken);
+        public async Task<Customer> UpdateCustomerAsync(string customerId, UpdateCustomerAttributes attributes, CancellationToken cancellationToken = default)
+        {
+            var request = new UpdateCustomerRequest(customerId, attributes);
+
+            var response = await _httpClient.PatchAsJsonAsync($"customers/{customerId}", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
