@@ -10,6 +10,6 @@ namespace LemonSqueezy.Client.Abstractions
         Task<Order> GetOrderAsync(string orderId, CancellationToken cancellationToken = default);
         Task<ApiResponseList<Order>> ListOrdersAsync(CancellationToken cancellationToken = default);
         Task<byte[]> GenerateInvoiceAsync(string orderId, CancellationToken cancellationToken = default);
-        Task<Order> IssueRefundAsync(string orderId, int amount, string reason, CancellationToken cancellationToken = default);
+        Task<Order> IssueRefundAsync(string orderId, int amount, CancellationToken cancellationToken = default);
     }
 }

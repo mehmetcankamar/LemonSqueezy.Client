@@ -271,22 +271,11 @@ namespace LemonSqueezy.Client.Internal.HttpClients
             return await response.Content.ReadAsByteArrayAsync();
         }
 
-        public async Task<Order> IssueRefundAsync(string orderId, int amount, string reason, CancellationToken cancellationToken = default)
+        public async Task<Order> IssueRefundAsync(string orderId, int amount, CancellationToken cancellationToken = default)
         {
-            var data = new
-            {
-                data = new
-                {
-                    type = "refunds",
-                    attributes = new
-                    {
-                        amount,
-                        reason
-                    }
-                }
-            };
+            var request = new IssueRefundRequest(orderId, amount);
 
-            var response = await _httpClient.PostAsJsonAsync($"orders/{orderId}/refund", data, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PostAsJsonAsync($"orders/{orderId}/refund", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -339,19 +328,11 @@ namespace LemonSqueezy.Client.Internal.HttpClients
             return result ?? throw new InvalidOperationException("Failed to deserialize response");
         }
 
-        public async Task<Subscription> UpdateSubscriptionAsync(string subscriptionId, string attributes, CancellationToken cancellationToken = default)
+        public async Task<Subscription> UpdateSubscriptionAsync(string subscriptionId, UpdateSubscriptionRequest request, CancellationToken cancellationToken = default)
         {
-            var data = new
-            {
-                data = new
-                {
-                    type = "subscriptions",
-                    id = subscriptionId,
-                    attributes = new { custom_data = attributes }
-                }
-            };
+            var wrapper = new UpdateSubscriptionRequestWrapper(subscriptionId, request);
 
-            var response = await _httpClient.PatchAsJsonAsync($"subscriptions/{subscriptionId}", data, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PatchAsJsonAsync($"subscriptions/{subscriptionId}", wrapper, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -395,13 +376,9 @@ namespace LemonSqueezy.Client.Internal.HttpClients
 
         public async Task<LicenseKey> ActivateLicenseKeyAsync(string key, string instance, CancellationToken cancellationToken = default)
         {
-            var data = new
-            {
-                license_key = key,
-                instance_name = instance
-            };
+            var request = new ActivateLicenseKeyRequest(key, instance);
 
-            var response = await _httpClient.PostAsJsonAsync("license-keys/activate", data, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PostAsJsonAsync("license-keys/activate", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -412,13 +389,9 @@ namespace LemonSqueezy.Client.Internal.HttpClients
 
         public async Task<LicenseKey> DeactivateLicenseKeyAsync(string key, string instance, CancellationToken cancellationToken = default)
         {
-            var data = new
-            {
-                license_key = key,
-                instance_name = instance
-            };
+            var request = new DeactivateLicenseKeyRequest(key, instance);
 
-            var response = await _httpClient.PostAsJsonAsync("license-keys/deactivate", data, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PostAsJsonAsync("license-keys/deactivate", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -429,21 +402,15 @@ namespace LemonSqueezy.Client.Internal.HttpClients
 
         public async Task<bool> ValidateLicenseKeyAsync(string key, string instance, CancellationToken cancellationToken = default)
         {
-            var data = new
-            {
-                license_key = key,
-                instance_name = instance
-            };
+            var request = new ValidateLicenseKeyRequest(key, instance);
 
-            var response = await _httpClient.PostAsJsonAsync("license-keys/validate", data, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PostAsJsonAsync("license-keys/validate", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            //var result = JsonSerializer.Deserialize<dynamic>(content);
+            var result = JsonSerializer.Deserialize<ValidateLicenseKeyResponse>(content, _jsonOptions);
 
-            //return result?.valid ?? false;
-
-            return false;
+            return result?.Valid ?? false;
         }
 
         public async Task<LicenseKeyInstance> GetLicenseKeyInstanceAsync(string instanceId, CancellationToken cancellationToken = default)

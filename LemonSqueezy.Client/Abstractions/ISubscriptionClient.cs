@@ -9,7 +9,7 @@ namespace LemonSqueezy.Client.Abstractions
     {
         Task<Subscription> GetSubscriptionAsync(string subscriptionId, CancellationToken cancellationToken = default);
         Task<ApiResponseList<Subscription>> ListSubscriptionsAsync(CancellationToken cancellationToken = default);
-        Task<Subscription> UpdateSubscriptionAsync(string subscriptionId, string attributes, CancellationToken cancellationToken = default);
+        Task<Subscription> UpdateSubscriptionAsync(string subscriptionId, UpdateSubscriptionRequest request, CancellationToken cancellationToken = default);
         Task<Subscription> CancelSubscriptionAsync(string subscriptionId, CancellationToken cancellationToken = default);
     }
 }
