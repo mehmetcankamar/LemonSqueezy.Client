@@ -7,6 +7,8 @@
     <PackageId>LemonSqueezy.Client.AspNetCore</PackageId>
     <Version>1.0.0-alpha</Version>
     <Description>ASP.NET Core integration for the Lemon Squeezy API client library</Description>
+    <PackageProjectUrl>https://github.com/mehmetcankamar/LemonSqueezy.Client</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mehmetcankamar/LemonSqueezy.Client</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -16,6 +18,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.3" />
     <ProjectReference Include="..\LemonSqueezy.Client\LemonSqueezy.Client.csproj" />
-    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="9.0.3" />
   </ItemGroup>
 </Project>
