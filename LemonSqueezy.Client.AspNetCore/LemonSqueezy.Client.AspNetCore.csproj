@@ -5,7 +5,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>LemonSqueezy.Client.AspNetCore</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.0-alpha</Version>
     <Description>ASP.NET Core integration for the Lemon Squeezy API client library</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>

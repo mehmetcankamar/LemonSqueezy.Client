@@ -2,6 +2,9 @@
 
 A C# client library for the [Lemon Squeezy API](https://docs.lemonsqueezy.com/api).
 
+> ⚠️ **WARNING: Alpha Stage Software**  
+> This package is in alpha stage and has not been thoroughly tested in production environments. Use with caution and expect potential breaking changes in future releases.
+
 ## Installation
 
 ```bash
