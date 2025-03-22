@@ -97,3 +97,8 @@ public class WebhooksController : ControllerBase
 ## License
 
 MIT
+
+
+## nuget build
+
+dotnet pack -c Release

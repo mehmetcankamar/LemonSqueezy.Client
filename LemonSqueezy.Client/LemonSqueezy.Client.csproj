@@ -12,7 +12,6 @@
     <PackageProjectUrl>https://github.com/mehmetcankamar/LemonSqueezy.Client</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mehmetcankamar/LemonSqueezy.Client</RepositoryUrl>
     <PackageTags>lemonsqueezy;api;client;payment;ecommerce</PackageTags>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
 
