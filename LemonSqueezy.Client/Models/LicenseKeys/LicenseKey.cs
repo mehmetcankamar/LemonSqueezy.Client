@@ -38,7 +38,7 @@ namespace LemonSqueezy.Client.Models.LicenseKeys
         public string KeyShort { get; set; } = default!;
 
         [JsonPropertyName("activation_limit")]
-        public int ActivationLimit { get; set; }
+        public int? ActivationLimit { get; set; }
 
         [JsonPropertyName("instances_count")]
         public int InstancesCount { get; set; }
