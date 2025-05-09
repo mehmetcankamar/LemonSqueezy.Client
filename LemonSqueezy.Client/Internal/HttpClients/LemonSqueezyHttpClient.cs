@@ -378,7 +378,7 @@ namespace LemonSqueezy.Client.Internal.HttpClients
         {
             var request = new ActivateLicenseKeyRequest(key, instance);
 
-            var response = await _httpClient.PostAsJsonAsync("license-keys/activate", request, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PostAsJsonAsync("licenses/activate", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -391,7 +391,7 @@ namespace LemonSqueezy.Client.Internal.HttpClients
         {
             var request = new DeactivateLicenseKeyRequest(key, instance);
 
-            var response = await _httpClient.PostAsJsonAsync("license-keys/deactivate", request, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PostAsJsonAsync("licenses/deactivate", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -404,7 +404,7 @@ namespace LemonSqueezy.Client.Internal.HttpClients
         {
             var request = new ValidateLicenseKeyRequest(key, instance);
 
-            var response = await _httpClient.PostAsJsonAsync("license-keys/validate", request, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PostAsJsonAsync("licenses/validate", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
