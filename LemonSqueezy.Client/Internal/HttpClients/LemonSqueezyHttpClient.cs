@@ -1,24 +1,22 @@
+using LemonSqueezy.Client.Abstractions;
+using LemonSqueezy.Client.Extensions;
+using LemonSqueezy.Client.Models.Abstractions;
+using LemonSqueezy.Client.Models.Customers;
+using LemonSqueezy.Client.Models.Files;
+using LemonSqueezy.Client.Models.LicenseKeys;
+using LemonSqueezy.Client.Models.OrderItems;
+using LemonSqueezy.Client.Models.Orders;
+using LemonSqueezy.Client.Models.Prices;
+using LemonSqueezy.Client.Models.Products;
+using LemonSqueezy.Client.Models.Stores;
+using LemonSqueezy.Client.Models.Subscriptions;
+using LemonSqueezy.Client.Models.Users;
+using LemonSqueezy.Client.Models.Variants;
 using System;
 using System.Net.Http;
-using LemonSqueezy.Client.Extensions;
-using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using LemonSqueezy.Client.Abstractions;
-using LemonSqueezy.Client.Configuration;
-using LemonSqueezy.Client.Models.Abstractions;
-using LemonSqueezy.Client.Models.Users;
-using LemonSqueezy.Client.Models.Stores;
-using LemonSqueezy.Client.Models.Customers;
-using LemonSqueezy.Client.Models.Products;
-using LemonSqueezy.Client.Models.Variants;
-using LemonSqueezy.Client.Models.Prices;
-using LemonSqueezy.Client.Models.Files;
-using LemonSqueezy.Client.Models.Orders;
-using LemonSqueezy.Client.Models.OrderItems;
-using LemonSqueezy.Client.Models.Subscriptions;
-using LemonSqueezy.Client.Models.LicenseKeys;
 
 namespace LemonSqueezy.Client.Internal.HttpClients
 {
@@ -374,37 +372,37 @@ namespace LemonSqueezy.Client.Internal.HttpClients
             return result ?? throw new InvalidOperationException("Failed to deserialize response");
         }
 
-        public async Task<LicenseKey> ActivateLicenseKeyAsync(string key, string instance, CancellationToken cancellationToken = default)
+        public async Task<ActivateLicenseKeyResponse> ActivateLicenseKeyAsync(string key, string instance, CancellationToken cancellationToken = default)
         {
             var request = new ActivateLicenseKeyRequest(key, instance);
 
-            var response = await _httpClient.PostAsJsonAsync("license-keys/activate", request, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PostAsJsonAsync("licenses/activate", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            var result = JsonSerializer.Deserialize<ApiResponse<LicenseKey>>(content, _jsonOptions);
+            var result = JsonSerializer.Deserialize<ActivateLicenseKeyResponse>(content, _jsonOptions);
 
-            return result?.Data ?? throw new InvalidOperationException("Failed to deserialize response");
+            return result ?? throw new InvalidOperationException("Failed to deserialize response");
         }
 
-        public async Task<LicenseKey> DeactivateLicenseKeyAsync(string key, string instance, CancellationToken cancellationToken = default)
+        public async Task<DeactivateLicenseKeyResponse> DeactivateLicenseKeyAsync(string key, string instance, CancellationToken cancellationToken = default)
         {
             var request = new DeactivateLicenseKeyRequest(key, instance);
 
-            var response = await _httpClient.PostAsJsonAsync("license-keys/deactivate", request, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PostAsJsonAsync("licenses/deactivate", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            var result = JsonSerializer.Deserialize<ApiResponse<LicenseKey>>(content, _jsonOptions);
+            var result = JsonSerializer.Deserialize<DeactivateLicenseKeyResponse>(content, _jsonOptions);
 
-            return result?.Data ?? throw new InvalidOperationException("Failed to deserialize response");
+            return result ?? throw new InvalidOperationException("Failed to deserialize response");
         }
 
         public async Task<bool> ValidateLicenseKeyAsync(string key, string instance, CancellationToken cancellationToken = default)
         {
             var request = new ValidateLicenseKeyRequest(key, instance);
 
-            var response = await _httpClient.PostAsJsonAsync("license-keys/validate", request, _jsonOptions, cancellationToken);
+            var response = await _httpClient.PostAsJsonAsync("licenses/validate", request, _jsonOptions, cancellationToken);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
