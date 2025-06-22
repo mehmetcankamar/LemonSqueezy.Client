@@ -35,7 +35,7 @@ namespace LemonSqueezy.Client.Models.Products
         public string LargeThumbUrl { get; set; } = default!;
 
         [JsonPropertyName("price")]
-        public int Price { get; set; }
+        public int? Price { get; set; }
 
         [JsonPropertyName("price_formatted")]
         public string PriceFormatted { get; set; } = default!;
