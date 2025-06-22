@@ -79,9 +79,15 @@ namespace LemonSqueezy.Client.Models.Webhooks
         public const string SubscriptionCreated = "subscription_created";
         public const string SubscriptionUpdated = "subscription_updated";
         public const string SubscriptionCancelled = "subscription_cancelled";
+        public const string SubscriptionResumed= "subscription_resumed";
+        public const string SubscriptionExpired = "subscription_exprired";
+        public const string SubscriptionPaused = "subscription_paused";
+        public const string SubscriptionUnpaused = "subscription_unpaused";
         public const string SubscriptionPaymentSuccess = "subscription_payment_success";
         public const string SubscriptionPaymentFailed = "subscription_payment_failed";
         public const string SubscriptionPaymentRecovered = "subscription_payment_recovered";
+        public const string SubscriptionPaymentRefunded = "subscription_payment_refunded";
+        public const string SubscriptionPlanChanged = "subscription_plan_changed";
         public const string LicenseKeyCreated = "license_key_created";
         public const string LicenseKeyActivated = "license_key_activated";
         public const string LicenseKeyDeactivated = "license_key_deactivated";
