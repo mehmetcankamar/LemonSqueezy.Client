@@ -13,6 +13,9 @@ namespace LemonSqueezy.Client.Models.Subscriptions
         [JsonPropertyName("store_id")]
         public int StoreId { get; set; }
 
+        [JsonPropertyName("subscription_id")]
+        public int SubscriptionId { get; set; }
+
         [JsonPropertyName("customer_id")]
         public int CustomerId { get; set; }
 

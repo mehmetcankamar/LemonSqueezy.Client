@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using LemonSqueezy.Client.Models.Orders;
 using LemonSqueezy.Client.Models.Subscriptions;
 using LemonSqueezy.Client.Models.LicenseKeys;
+using System.Collections.Generic;
 
 namespace LemonSqueezy.Client.Models.Webhooks
 {
@@ -22,6 +23,9 @@ namespace LemonSqueezy.Client.Models.Webhooks
 
         [JsonPropertyName("test_mode")]
         public bool TestMode { get; set; }
+
+        [JsonPropertyName("custom_data")]
+        public Dictionary<string, string> CustomData { get; set; } = new Dictionary<string, string>();
     }
 
     public class WebhookData
