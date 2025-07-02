@@ -2,6 +2,7 @@ using System;
 using System.Text.Json.Serialization;
 using LemonSqueezy.Client.Models.Orders;
 using LemonSqueezy.Client.Models.Subscriptions;
+using LemonSqueezy.Client.Models.SubscriptionInvoices;
 using LemonSqueezy.Client.Models.LicenseKeys;
 using System.Collections.Generic;
 
@@ -74,6 +75,18 @@ namespace LemonSqueezy.Client.Models.Webhooks
             }
             catch { return false; }
         }
+
+        public bool TryGetSubscriptionInvoice(out SubscriptionInvoice? subscriptionInvoice)
+        {
+            subscriptionInvoice = null;
+            if (Type != "subscription-invoices") return false;
+            try
+            {
+                subscriptionInvoice = new SubscriptionInvoice { Id = Id, Attributes = (SubscriptionInvoiceAttributes)Attributes! };
+                return true;
+            }
+            catch { return false; }
+        }
     }
 
     public static class WebhookEventNames
@@ -92,6 +105,7 @@ namespace LemonSqueezy.Client.Models.Webhooks
         public const string SubscriptionPaymentRecovered = "subscription_payment_recovered";
         public const string SubscriptionPaymentRefunded = "subscription_payment_refunded";
         public const string SubscriptionPlanChanged = "subscription_plan_changed";
+        public const string SubscriptionInvoiceCreated = "subscription_invoice_created";
         public const string LicenseKeyCreated = "license_key_created";
         public const string LicenseKeyActivated = "license_key_activated";
         public const string LicenseKeyDeactivated = "license_key_deactivated";
