@@ -52,6 +52,9 @@ namespace LemonSqueezy.Client.Models.Subscriptions
         [JsonPropertyName("card_last_four")]
         public string CardLastFour { get; set; } = default!;
 
+        [JsonPropertyName("payment_processor")]
+        public string PaymentProcessor { get; set; } = default!;
+
         [JsonPropertyName("pause")]
         public object? Pause { get; set; }
 
@@ -99,6 +102,9 @@ namespace LemonSqueezy.Client.Models.Subscriptions
 
         [JsonPropertyName("quantity")]
         public int Quantity { get; set; }
+
+        [JsonPropertyName("is_usage_based")]
+        public bool IsUsageBased { get; set; }
 
         [JsonPropertyName("created_at")]
         public DateTimeOffset CreatedAt { get; set; }

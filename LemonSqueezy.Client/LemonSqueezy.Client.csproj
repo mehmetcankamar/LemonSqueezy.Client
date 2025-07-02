@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <LangVersion>8.0</LangVersion>
     <PackageId>LemonSqueezy.Client</PackageId>
-    <Version>1.0.5-alpha</Version>
+    <Version>1.0.6-alpha</Version>
     <Authors>Mehmet Can Kamar</Authors>
     <Description>A .NET client library for the LemonSqueezy API</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

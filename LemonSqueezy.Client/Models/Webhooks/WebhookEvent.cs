@@ -5,6 +5,9 @@ using LemonSqueezy.Client.Models.Subscriptions;
 using LemonSqueezy.Client.Models.SubscriptionInvoices;
 using LemonSqueezy.Client.Models.LicenseKeys;
 using System.Collections.Generic;
+using LemonSqueezy.Client.Models.Abstractions;
+using LemonSqueezy.Client.Models.Products;
+using System.Text.Json;
 
 namespace LemonSqueezy.Client.Models.Webhooks
 {
@@ -46,7 +49,7 @@ namespace LemonSqueezy.Client.Models.Webhooks
             if (Type != "orders") return false;
             try
             {
-                order = new Order { Id = Id, Attributes = (OrderAttributes)Attributes! };
+                order = new Order { Id = Id, Attributes = ((JsonElement)Attributes).Deserialize<OrderAttributes>() };
                 return true;
             }
             catch { return false; }
@@ -58,7 +61,8 @@ namespace LemonSqueezy.Client.Models.Webhooks
             if (Type != "subscriptions") return false;
             try
             {
-                subscription = new Subscription { Id = Id, Attributes = (SubscriptionAttributes)Attributes! };
+
+                subscription = new Subscription { Id = Id, Attributes = ((JsonElement)Attributes).Deserialize<SubscriptionAttributes>() };
                 return true;
             }
             catch { return false; }
@@ -70,7 +74,7 @@ namespace LemonSqueezy.Client.Models.Webhooks
             if (Type != "license-keys") return false;
             try
             {
-                licenseKey = new LicenseKey { Id = Id, Attributes = (LicenseKeyAttributes)Attributes! };
+                licenseKey = new LicenseKey { Id = Id, Attributes = ((JsonElement)Attributes).Deserialize<LicenseKeyAttributes>() };
                 return true;
             }
             catch { return false; }
@@ -82,7 +86,7 @@ namespace LemonSqueezy.Client.Models.Webhooks
             if (Type != "subscription-invoices") return false;
             try
             {
-                subscriptionInvoice = new SubscriptionInvoice { Id = Id, Attributes = (SubscriptionInvoiceAttributes)Attributes! };
+                subscriptionInvoice = new SubscriptionInvoice { Id = Id, Attributes = ((JsonElement)Attributes).Deserialize<SubscriptionInvoiceAttributes>() };
                 return true;
             }
             catch { return false; }
